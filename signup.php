@@ -1,7 +1,7 @@
 <?php
 require "header.php";
 ?>
-  <form class="form-box" action="includes/signup.inc.php" method="post">
+  <form class="form-box" action="includes/Signup.inc.php" method="post">
     <h1>Sign Up</h1>
     <input type="text" name="username" placeholder="Username">
     <input type="password" name="password" placeholder="Password">
