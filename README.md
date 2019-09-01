@@ -1,1 +1,3 @@
-# web-programiranje-projekt
+# Projekt iz Web programiranja
+
+Heroku demo: https://web-prog-knjige.herokuapp.com/
