@@ -35,20 +35,8 @@ if(isset($_SESSION['userId'])) {
       $result = mysqli_stmt_get_result($stmt);
       $rating = mysqli_fetch_assoc($result);
   }
-}
 
-$sql = "SELECT AVG(rating) from book_ratings WHERE book_id=?;";
-$stmt = mysqli_stmt_init($conn);
-if (!mysqli_stmt_prepare($stmt, $sql)) {
-    echo "SQL statement failed";
-} else {
-    mysqli_stmt_bind_param($stmt, "s", $book_id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $avg_rating = mysqli_fetch_assoc($result);
-}
-
-$sql = "SELECT * from book_lists WHERE user_id=?;";
+  $sql = "SELECT * from book_lists WHERE user_id=?;";
 $stmt = mysqli_stmt_init($conn);
 if (!mysqli_stmt_prepare($stmt, $sql)) {
     echo "SQL statement failed";
@@ -81,21 +69,35 @@ foreach ($listsTmp as $list_info) {
       $lists[] = $list_info;
   }
 }
+}
+
+$sql = "SELECT AVG(rating) from book_ratings WHERE book_id=?;";
+$stmt = mysqli_stmt_init($conn);
+if (!mysqli_stmt_prepare($stmt, $sql)) {
+    echo "SQL statement failed";
+} else {
+    mysqli_stmt_bind_param($stmt, "s", $book_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $avg_rating = mysqli_fetch_assoc($result);
+}
+
+
 ?>
 <?php if(isset($_SESSION['msg_type']) && isset($_SESSION['message'])): ?>
-    <div class="msg <?php echo $_SESSION['msg_type']; ?>-msg">
-      <div class="center">
-        <?php if($_SESSION['msg_type'] == 'error'): ?>
-          <i class="fas fa-exclamation-circle"></i>
-        <?php else: ?>
-          <i class="far fa-check-circle"></i>
-        <?php endif; ?>
-        <?php foreach($_SESSION['message'] as $message):?>
-          <span><?php echo $message; ?></span>
-        <?php endforeach; ?>
-      </div>
-    </div>
-    <?php
+<div class="msg <?php echo $_SESSION['msg_type']; ?>-msg">
+  <div class="center">
+    <?php if($_SESSION['msg_type'] == 'error'): ?>
+    <i class="fas fa-exclamation-circle"></i>
+    <?php else: ?>
+    <i class="far fa-check-circle"></i>
+    <?php endif; ?>
+    <?php foreach($_SESSION['message'] as $message):?>
+    <span><?php echo $message; ?></span>
+    <?php endforeach; ?>
+  </div>
+</div>
+<?php
       endif; 
       unset($_SESSION['msg_type']);
       unset($_SESSION['message']);
@@ -109,19 +111,22 @@ foreach ($listsTmp as $list_info) {
     </div>
   </div>
   <div class="main">
-      <div class="book-info">
+    <div class="book-info">
       <h2 class="book-title">Book info:</h2>
       <div class="book-info-content">
-        <p>Year of release: </p>
-        <p>Genre: </p>
-        <p>Num of pages: </p>
+        <p>Year of release: <span class="book-info-value"><?php echo $book['year']; ?></span></p>
+        <p>Genre: <span class="book-info-value"><?php echo $book['genre']; ?></span></p>
+        <p>Num of pages: <span class="book-info-value"><?php echo $book['numPages']; ?></span></p>
         <p>ISBN: <span class="book-info-value"><?php echo $book['isbn']; ?><span></p>
-        <p>Avg. rating: <?php echo number_format((float)$avg_rating['AVG(rating)'], 2, '.', ''); ?></p>
+        <p>Avg. rating: <span
+            class="book-info-value"><?php echo number_format((float)$avg_rating['AVG(rating)'], 2, '.', ''); ?><span>
+        </p>
       </div>
     </div>
     <br>
     <div class="book-actions">
-      <a href="http://baza.gskos.hr/cgi-bin/wero.cgi?q=<?php echo $book['isbn'] ?>" target="_blank" class="btn" id="library-btn">Find in library</a>
+      <a href="http://baza.gskos.hr/cgi-bin/wero.cgi?q=<?php echo $book['isbn'] ?>" target="_blank" class="btn"
+        id="library-btn">Find in library</a>
       <?php
         if (isset($_SESSION['userId'])):
       ?>
@@ -130,12 +135,13 @@ foreach ($listsTmp as $list_info) {
         <div class="dropdown-content">
           <?php
             foreach ($lists as $list): ?>
-            <a href="includes/<?php echo $list["numOfRows"] > 0 ? 'RemoveFromList' : 'AddToList' ?>.inc.php?listid=<?php echo $list["id"]; ?>&bookid=<?php echo $book['id']; ?>">
-              <?php echo $list["name"]; ?>
-              <?php if($list["numOfRows"] > 0): ?>
-                <i class="fas fa-check"></i>
-              <?php endif; ?>
-            </a>
+          <a
+            href="includes/<?php echo $list["numOfRows"] > 0 ? 'RemoveFromList' : 'AddToList' ?>.inc.php?listid=<?php echo $list["id"]; ?>&bookid=<?php echo $book['id']; ?>">
+            <?php echo $list["name"]; ?>
+            <?php if($list["numOfRows"] > 0): ?>
+            <i class="fas fa-check"></i>
+            <?php endif; ?>
+          </a>
           <?php endforeach;?>
         </div>
       </div>
@@ -158,8 +164,8 @@ foreach ($listsTmp as $list_info) {
       <p><?php echo $book['synopsis']; ?> </p>
     </div>
   </div>
-  
-  
+
+
 </div>
 </div>
 </body>

@@ -26,7 +26,7 @@
         <?php
           if(isset($_SESSION['userId']) && isset($_SESSION['adminstatus']) && $_SESSION['adminstatus'] == 1) {
             echo '<li>
-                    <span class="nav-link">Logged in as: '. $_SESSION['username'].'</span>
+                    <span class="nav-username">Logged in as: '. $_SESSION['username'].'</span>
                   </li>
                   <li>
                     <a href="managebooks.php" class="nav-link"><i class="icon fas fa-book"></i>Manage Books</a>
@@ -52,7 +52,7 @@
                   </li>';
           } else if(isset($_SESSION['userId']) && isset($_SESSION['adminstatus']) && $_SESSION['adminstatus'] == 0) {
             echo '<li>
-                    <span class="nav-link">Logged in as: '. $_SESSION['username'].'</span>
+                    <span class="nav-username">Logged in as: '. $_SESSION['username'].'</span>
                   </li>
                   <li>
                     <a href="managelists.php" class="nav-link"><i class="icon fas fa-list-alt"></i>My lists</a>

@@ -38,7 +38,7 @@
       unset($_SESSION['message']);
     ?>
     <h2 class="table-title">Users list</h2>
-    <table class="custom-table">
+    <table class="custom-table users-table">
       <tr>
         <th>ID</th>
         <th>Username</th>

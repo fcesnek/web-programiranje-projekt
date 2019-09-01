@@ -30,12 +30,17 @@ if (!isset($_GET['query'])) {
 }
 ?>
 
-<div>
+<div class="search-div">
   <form action="index.php" method="get">
     <input type="text" name="query" placeholder="Search by title or author" id="searchField">
-    <input type="submit" value="Search">
+    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
   </form>
 </div>
+<div class="separator">
+  <hr>
+</div>
+
+
 <main class="cards">
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
   <article class="card">

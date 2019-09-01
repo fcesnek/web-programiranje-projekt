@@ -40,7 +40,7 @@
     ?>
     <a href="createbook.php" id="createbook-btn" class="btn"><i class="icon fas fa-plus-circle"></i>Add book</a>
 
-    <table class="custom-table">
+    <table class="custom-table books-table">
       <tr>
         <th>Title</th>
         <th>Author</th>

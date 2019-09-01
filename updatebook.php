@@ -28,9 +28,12 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     <input type="text" name="booktitle" placeholder="Title" value="<?php echo $book['title']; ?>">
     <input type="text" name="author" placeholder="Author" value="<?php echo $book['author']; ?>">
     <input type="text" name="isbn" placeholder="ISBN" value="<?php echo $book['isbn']; ?>">
+    <input type="text" name="genre" placeholder="Genre" value="<?php echo $book['genre']; ?>">
+    <input type="text" name="numPages" placeholder="Number of pages" value="<?php echo $book['numPages']; ?>">
+    <input type="text" name="year" placeholder="Year of release" value="<?php echo $book['year']; ?>">
     <textarea name="synopsis" placeholder="Synopsis" rows="10" cols="70" > <?php echo $book['synopsis']; ?></textarea>
     <input type="file" name="bookcover" id="bookcover" class="inputfile" />
-    <label for="bookcover"><span>Choose book image&hellip;</span></label>
+    <label for="bookcover"><span class="chooseImgText">Choose book image&hellip;</span></label>
     <input type="submit" name="update-book" value="Update">
   </form>
   <div>

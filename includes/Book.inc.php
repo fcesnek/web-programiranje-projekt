@@ -6,6 +6,9 @@ if (isset($_POST['add-book'])) {
     $title = $_POST['booktitle'];
     $author = $_POST['author'];
     $isbn = $_POST['isbn'];
+    $genre = $_POST['genre'];
+    $numPages = $_POST['numPages'];
+    $year = $_POST['year'];
     $synopsis = $_POST['synopsis'];
     $cover = $_FILES['bookcover'];
 
@@ -19,7 +22,7 @@ if (isset($_POST['add-book'])) {
 
     $allowed = array('jpg', 'jpeg', 'png');
 
-    if (empty($title) || empty($author) || empty($isbn) || empty($synopsis) || empty($fileName)) {
+    if (empty($title) || empty($genre) || empty($numPages) || empty($year) || empty($author) || empty($isbn) || empty($synopsis) || empty($fileName)) {
         session_start();
         $_SESSION['msg_type'] = "error";
         $_SESSION['message'][] = "Please fill out all the fields.";
@@ -54,7 +57,7 @@ if (isset($_POST['add-book'])) {
             exit();
         }
 
-        $sql = "INSERT INTO books (title, author, image, synopsis, isbn) VALUES (?, ?, ?, ?, ?);";
+        $sql = "INSERT INTO books (title, author, image, synopsis, isbn, genre, year, numPages) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
 
         if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -64,7 +67,7 @@ if (isset($_POST['add-book'])) {
             header("Location: ../managebooks.php?error=sqlerror");
             exit();
         } else {
-            mysqli_stmt_bind_param($stmt, "sssss", $title, $author, $imagePath, $synopsis, $isbn);
+            mysqli_stmt_bind_param($stmt, "ssssssis", $title, $author, $imagePath, $synopsis, $isbn, $genre, $year, $numPages);
             mysqli_stmt_execute($stmt);
 
             move_uploaded_file($fileTmpName, $fileDestination);
@@ -85,6 +88,9 @@ if (isset($_POST['add-book'])) {
     $isbn = $_POST['isbn'];
     $synopsis = $_POST['synopsis'];
     $cover = $_FILES['bookcover'];
+    $genre = $_POST['genre'];
+    $numPages = $_POST['numPages'];
+    $year = $_POST['year'];
 
     $fileName = $_FILES['bookcover']['name'];
     $fileTmpName = $_FILES['bookcover']['tmp_name'];
@@ -96,7 +102,7 @@ if (isset($_POST['add-book'])) {
 
     $allowed = array('jpg', 'jpeg', 'png');
 
-    if (empty($title) || empty($author) || empty($isbn) || empty($synopsis) || empty($fileName)) {
+    if (empty($title) || empty($genre) || empty($numPages) || empty($year) || empty($author) || empty($isbn) || empty($synopsis) || empty($fileName)) {
         session_start();
         $_SESSION['msg_type'] = "error";
         $_SESSION['message'][] = "Please fill out all the fields.";
@@ -131,7 +137,7 @@ if (isset($_POST['add-book'])) {
             exit();
         }
 
-        $sql = "UPDATE books SET title=?, author=?, image=?, synopsis=?, isbn=? WHERE id=?;";
+        $sql = "UPDATE books SET title=?, author=?, image=?, synopsis=?, isbn=?, genre=?, year=?, numPages=? WHERE id=?;";
         $stmt = mysqli_stmt_init($conn);
 
         if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -141,7 +147,7 @@ if (isset($_POST['add-book'])) {
             header("Location: ../updatebook.php?edit=$id&?error=sqlerror");
             exit();
         } else {
-            mysqli_stmt_bind_param($stmt, "ssssss", $title, $author, $imagePath, $synopsis, $isbn, $id);
+            mysqli_stmt_bind_param($stmt, "ssssssiss", $title, $author, $imagePath, $synopsis, $isbn, $genre, $year, $numPages, $id);
             mysqli_stmt_execute($stmt);
 
             move_uploaded_file($fileTmpName, $fileDestination);
@@ -186,6 +192,30 @@ if (isset($_POST['add-book'])) {
     } else {
         mysqli_stmt_bind_param($stmt, "s", $id);
         mysqli_stmt_execute($stmt);
+    }
+
+    $sql = "SELECT image FROM books WHERE id=?;";
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        session_start();
+        $_SESSION['msg_type'] = "error";
+        $_SESSION['message'][] = "Database error, try again later.";
+        header("Location: ../managebooks.php?error=sqlerror");
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "s", $id);
+        mysqli_stmt_execute($stmt);
+
+        $result = mysqli_stmt_get_result($stmt);
+        $bookImgPath = mysqli_fetch_assoc($result);
+    }
+
+    $path = "../".$bookImgPath['image'];
+    $bookImgRealPath = realpath($path);
+    print_r($bookImgRealPath);
+    if(is_writable($bookImgRealPath)) {
+        unlink($bookImgRealPath);
     }
 
     // Delete the book

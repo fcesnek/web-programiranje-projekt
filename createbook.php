@@ -13,9 +13,12 @@ if(!isset($_SERVER['HTTP_REFERER'])){
     <input type="text" name="booktitle" placeholder="Title">
     <input type="text" name="author" placeholder="Author">
     <input type="text" name="isbn" placeholder="ISBN">
+    <input type="text" name="genre" placeholder="Genre">
+    <input type="text" name="numPages" placeholder="Number of pages">
+    <input type="text" name="year" placeholder="Year of release">
     <textarea name="synopsis" placeholder="Synopsis" rows="10" cols="70"></textarea>
     <input type="file" name="bookcover" id="bookcover" class="inputfile" />
-    <label for="bookcover"><span>Choose book image&hellip;</span></label>
+    <label for="bookcover"><span class="chooseImgText">Choose book image&hellip;</span></label>
     <input type="submit" name="add-book" value="Submit">
   </form>
 </main>

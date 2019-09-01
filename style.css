@@ -3,7 +3,9 @@
   padding: 0;
   margin: 0;
 }
-
+html {
+  height: 100%;
+}
 body {
   font-family: 'Lexend Deca', sans-serif;
   font-size: 14pt;
@@ -11,7 +13,9 @@ body {
   min-height: 100%;
 }
 
-/* NAVIGATION BAR */
+/*==================================== */
+/*============= NAVBAR =============== */
+/*==================================== */
 .navbar {
   font-size: 1.05em;
   background-color: #5fccb2;
@@ -70,7 +74,7 @@ body {
   margin-right: 5px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 820px) {
   .navbar {
     display: flex;
     justify-content: space-between;
@@ -112,18 +116,14 @@ body {
     margin-left: 40px;
   }
 }
-
-/* FORMS */
+/*=================================== */
+/*============= FORMS =============== */
+/*=================================== */
 
 .form-box {
-  margin: 50px auto 10px auto;
-  width: 600px;
-  padding: 20px;
   text-align: center;
-  -webkit-box-shadow: inset 0px 1px 14px -1px rgba(0,0,0,0.08);
-  -moz-box-shadow: inset 0px 1px 14px -1px rgba(0,0,0,0.08);
-  box-shadow: inset 0px 1px 14px -1px rgba(0,0,0,0.08);
 }
+
 .form-box .form-title {
   padding: 20px 0;
   margin: 20px 0;
@@ -131,6 +131,7 @@ body {
 .form-box h1 {
   text-transform: uppercase;
   font-weight: 500;
+  font-size: 1.5em;
 }
 .form-box input[type='text'],
 .form-box input[type='password'],
@@ -196,17 +197,32 @@ body {
 .inputfile + label:hover {
   background: #33a08627;
 }
-/* ALERTS */
 
-.signuperror {
-  color: red;
+.chooseImgText {
+  font-size: 0.7em;
 }
 
-.signupsuccess {
-  color: green;
+@media screen and (min-width: 768px) {
+  .form-box {
+    margin: 50px auto 10px auto;
+    width: 600px;
+    padding: 20px;
+    text-align: center;
+    -webkit-box-shadow: inset 0px 1px 14px -1px rgba(0, 0, 0, 0.08);
+    -moz-box-shadow: inset 0px 1px 14px -1px rgba(0, 0, 0, 0.08);
+    box-shadow: inset 0px 1px 14px -1px rgba(0, 0, 0, 0.08);
+  }
+  .form-box h1 {
+    font-size: 2em;
+  }
+  .chooseImgText {
+    font-size: 1em;
+  }
 }
 
-/* BUTTONS */
+/*=================================== */
+/*============= BUTTONS =============== */
+/*=================================== */
 
 .btn {
   color: #002627;
@@ -258,7 +274,10 @@ body {
 .action-btn-delete:hover {
   background: #b5151086;
 }
-/* TABLES */
+
+/*=================================== */
+/*============= TABLES =============== */
+/*=================================== */
 
 .custom-table {
   font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
@@ -292,16 +311,81 @@ body {
   margin-bottom: 30px;
 }
 
+@media screen and (max-width: 1024px) {
+  .custom-table,
+  .custom-table thead,
+  .custom-table tbody,
+  .custom-table th,
+  .custom-table td,
+  .custom-table tr {
+    display: block;
+  }
+
+  .custom-table tr th {
+    display:none;
+  }
+
+  .custom-table tr {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  .custom-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  .custom-table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+
+  .books-table td:nth-of-type(1):before {
+    content: 'Title';
+  }
+  .books-table td:nth-of-type(2):before {
+    content: 'Author';
+  }
+  .books-table td:nth-of-type(3):before {
+    content: 'ISBN';
+  }
+  .books-table td:nth-of-type(4):before {
+    content: 'Actions';
+  }
+
+  .users-table td:nth-of-type(1):before {
+    content: 'ID';
+  }
+  .users-table td:nth-of-type(2):before {
+    content: 'Username';
+  }
+  .users-table td:nth-of-type(3):before {
+    content: 'Admin';
+  }
+  .users-table td:nth-of-type(4):before {
+    content: 'Actions';
+  }
+}
+
 /* FLEX */
+
 .cards {
   vertical-align: bottom;
   display: flex;
   flex-wrap: wrap;
   align-items: stretch;
-  padding: 30px 100px;
+  max-width: 1350px;
+  margin: 0 auto;
+  text-align: center;
 }
 .card {
-  flex: 0 0 230px;
+  flex: 0 0 80px;
   margin: 10px;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
@@ -335,8 +419,10 @@ body {
   transition: all 0.3s ease 0s;
 }
 
-.dropdown-content-view {
-  display: inline;
+@media screen and (min-width: 820px) {
+  .card {
+    flex: 0 0 250px;
+  }
 }
 
 /* Column container */
@@ -375,13 +461,11 @@ body {
   height: 80%;
 }
 
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -391,7 +475,6 @@ body {
   z-index: 1;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -399,20 +482,18 @@ body {
   display: block;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #f1f1f1;
 }
 
-/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .btn {
   background-color: #d4d4d4;
 }
+
 
 .lists {
   margin: 0 auto;
@@ -434,25 +515,31 @@ body {
 
 /* Favorites */
 .list-color-cyan {
-  background-color: #5FCCB2;
+  background-color: #5fccb2;
 }
 
 /* Currently reading */
 .list-color-purple {
-  background-color: #8889DE;
+  background-color: #8889de;
 }
 /* Plan to read */
 .list-color-yellow {
-  background-color: #CBEF90;
+  background-color: #cbef90;
 }
 /* Read */
 .list-color-grey {
-  background-color: #98B0A9;
+  background-color: #98b0a9;
 }
 .lists a {
   text-decoration: none;
   color: black;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .lists {
+    width: 70%;
+  }
 }
 
 .book-actions {
@@ -465,7 +552,7 @@ body {
   padding: 15px;
 }
 
-.book-info-content{
+.book-info-content {
   margin-top: 10px;
   padding-left: 10px;
   color: rgb(99, 99, 99);
@@ -530,27 +617,26 @@ body {
   transition: all 0.3s ease 0s;
 }
 
-
 .msg {
   text-align: center;
-  width: 40%;
+  width: 90%;
   height: 50px;
   border-radius: 10px;
   margin: 20px auto;
   position: relative;
 }
 .error-msg {
-  background-color:red;
+  background-color: red;
   color: white;
   font-weight: 100;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 .success-msg {
-  background-color:green;
+  background-color: green;
   color: white;
   font-weight: 100;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
 .center {
@@ -561,3 +647,68 @@ body {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+@media screen and (min-width: 768px) {
+  .msg {
+    text-align: center;
+    width: 40%;
+  }
+}
+
+
+
+/* ************************************* */
+/* *********** SEARCH BOX ************ */
+/* ************************************* */
+
+.search-div {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.search-btn {
+  height: 100%;
+  padding: 10px;
+  font-size: 1em;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 50%;
+  transition: all 0.3s ease 0s;
+}
+.search-btn:hover {
+  cursor: pointer;
+  background-color: #5fccb2;
+  transition: all 0.3s ease 0s;
+}
+
+#searchField {
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 40%;
+  height: 100%;
+  padding: 5px;
+  font-size: 0.6em;
+  margin-right: 10px;
+  transition: all 0.3s ease 0s;
+}
+
+#searchField:hover,
+#searchField:focus {
+  outline: none;
+  transition: all 0.3s ease 0s;
+  border: 1px solid #5fccb2;
+  background: #fff;
+}
+
+.separator {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  #searchField {
+    font-size: 1em;
+  }
+}
+

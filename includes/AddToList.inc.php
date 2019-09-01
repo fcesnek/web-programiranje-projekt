@@ -12,7 +12,7 @@ if (isset($_GET['listid']) && isset($_GET['bookid'])) {
         session_start();
         $_SESSION['msg_type'] = "error";
         $_SESSION['message'][] = "Database error, try again later.";
-        header("Location: ../viewbook.php?error=sqlerror");
+        header("Location: ../viewbook.php?id=$bookid&error=sqlerror");
         exit();
     } else {
         mysqli_stmt_bind_param($stmt, "ss", $bookid, $listid);

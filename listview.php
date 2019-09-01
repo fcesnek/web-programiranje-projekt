@@ -1,9 +1,9 @@
 <?php
-  require "header.php";
-  if(!isset($_SERVER['HTTP_REFERER'])){
+require "header.php";
+if (!isset($_SERVER['HTTP_REFERER'])) {
     header('location: ./index.php');
     exit;
-  }
+}
 ?>
 
 <?php
@@ -18,12 +18,12 @@ $listNameQuery = "SELECT name
 $stmt = mysqli_stmt_init($conn);
 
 if (!mysqli_stmt_prepare($stmt, $listNameQuery)) {
-  echo "SQL statement failed";
+    echo "SQL statement failed";
 } else {
-  mysqli_stmt_bind_param($stmt, "s", $list_id);
-  mysqli_stmt_execute($stmt);
-  $result = mysqli_stmt_get_result($stmt);
-  $listName = mysqli_fetch_assoc($result);
+    mysqli_stmt_bind_param($stmt, "s", $list_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $listName = mysqli_fetch_assoc($result);
 }
 
 $sql = "SELECT *
@@ -39,8 +39,9 @@ if (!mysqli_stmt_prepare($stmt, $sql)) {
     $result = mysqli_stmt_get_result($stmt);
 }
 ?>
-<div style="margin-left: 8%;">
-  <h2 style="font-weight: 100;">Viewing list: <span style="font-weight: bold;"><?php echo $listName["name"]; ?></span></h2>
+<div style="margin-left: 8%; margin-top: 2%;">
+  <h2 style="font-weight: 100;">Viewing list: <span style="font-weight: bold;"><?php echo $listName["name"]; ?></span>
+  </h2>
 </div>
 <main class="cards">
   <?php while ($row = mysqli_fetch_assoc($result)): ?>
