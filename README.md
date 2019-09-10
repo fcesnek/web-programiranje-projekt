@@ -1,4 +1,3 @@
 # Projekt iz Web programiranja
 
-Demo: https://web-prog-knjige.azurewebsites.net
-https://web-prog-knjige.herokuapp.com/
+Demo: https://web-knjige.azurewebsites.net/
